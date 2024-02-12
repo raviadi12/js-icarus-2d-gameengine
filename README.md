@@ -1,5 +1,3 @@
-Certainly! Here's a basic template for your `README.md` file. Feel free to customize it to better fit your project:
-
 # ICARUS - Efficient CPU-Based 2D Render Engine
 
 ICARUS is a lightweight and efficient CPU-based 2D render engine designed for simplicity and performance. It is built using Vite, providing a fast development environment with hot module replacement (HMR) for real-time updates.
