@@ -8,7 +8,7 @@ export class Physics {
       const otherRatio = otherShape.mass / totalMass;
   
       shape.velocityX = thisRatio * shape.velocityX + otherRatio * otherShape.velocityX;
-      shape.velocityY = thisRatio * shape.velocityY + otherRatio * otherShape.velocityY;
+  //    shape.velocityY = thisRatio * shape.velocityY + otherRatio * otherShape.velocityY;
       } else {
       this.applyElasticity(shape);
       }

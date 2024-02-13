@@ -33,14 +33,12 @@ export class PhysicsShape {
         // Handle collision with other shapes
         if (shape.dynamic) {
           this.physics.applyElasticity(this);
-          this.physics.applyMomentum(this, shape);
     //    this.updatePosition(); 
           shape.physics.applyMomentum(shape, this);
     //    shape.updatePosition(); 
           return;
         } else {
           this.physics.applyElasticity(this);
-          this.physics.applyMomentum(this, shape);
   //      this.updatePosition();
           return; 
         }
@@ -86,13 +84,24 @@ export class PhysicsShape {
   */
 
   isCollidingWith(otherShape) {
-    return (
-      this.x < otherShape.x + otherShape.width &&
-      this.x + this.width > otherShape.x &&
-      this.y < otherShape.y + otherShape.height &&
-      this.y + this.height > otherShape.y
-    );
+    const deltaX = (otherShape.x + otherShape.width / 2) - (this.x + this.width / 2);
+    const deltaY = (otherShape.y + otherShape.height / 2) - (this.y + this.height / 2);
+  
+    const combinedHalfWidths = this.width / 2 + otherShape.width / 2;
+    const combinedHalfHeights = this.height / 2 + otherShape.height / 2;
+  
+    const overlapX = combinedHalfWidths - Math.abs(deltaX);
+    const overlapY = combinedHalfHeights - Math.abs(deltaY);
+  
+    if (overlapX > 0 && overlapY > 0) {
+      // Colliding
+      return true;
+    } else {
+      // Not colliding
+      return false;
+    }
   }
+  
 }
 
 
