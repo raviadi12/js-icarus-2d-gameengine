@@ -17,7 +17,6 @@ export class PhysicsShape {
   }
 
   updatePosition() {
-    // Update position based on velocity
     this.x += this.velocityX;
     this.y += this.velocityY;
   }
@@ -28,13 +27,11 @@ export class PhysicsShape {
     this.physics.applyGravity(this, gravity);
 
     // Check for collisions with other shapes
-    for (const shape of canvasCreator.shapes) {
-      if (shape !== this && this.isCollidingWith(shape)) {
-        // Handle collision with other shapes
-        if (shape.dynamic) {
+    for (const othershape of canvasCreator.shapes) {
+      if (othershape !== this && this.isCollidingWith(othershape)) {
+        if (othershape.dynamic) {
           this.physics.applyElasticity(this);
-    //    this.updatePosition(); 
-          shape.physics.applyMomentum(shape, this);
+          othershape.physics.applyMomentum(othershape, this);
     //    shape.updatePosition(); 
           return;
         } else {
@@ -45,7 +42,7 @@ export class PhysicsShape {
       }
     }
     if (this.x < 0 || this.x + this.width > canvasCreator.canvas.width) {
-      this.velocityX *= -this.elasticity; // Reverse x-direction for bouncing effect
+      this.velocityX *= -this.elasticity; 
     }
     if (this.y < 0 || this.y + this.height > canvasCreator.canvas.height) {
       this.physics.applyElasticity(this); 
