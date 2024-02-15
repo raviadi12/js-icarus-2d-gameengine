@@ -1,4 +1,5 @@
 import { Physics } from "./physics";
+import { CollisionDetectionMechanics } from "./Utility/collisionDetection";
 
 export class PhysicsShape {
   constructor(x, y, width, height, color, mass, elasticity) {
@@ -14,6 +15,7 @@ export class PhysicsShape {
     this.velocityY = 0; // Initial velocity in the y-
     this.minVelocity = 0.1;
     this.physics = new Physics();
+    this.collision = new CollisionDetectionMechanics();
   }
 
   updatePosition() {
@@ -22,33 +24,53 @@ export class PhysicsShape {
   }
 
   update(gravity, canvasCreator) {
-    // Update position and apply gravity
+    // Check for collisions with other shapes
     this.updatePosition();
     this.physics.applyGravity(this, gravity);
-
-    // Check for collisions with other shapes
     for (const othershape of canvasCreator.shapes) {
-      if (othershape !== this && this.isCollidingWith(othershape)) {
+      if (othershape !== this && (this.collision.isCollidingWith(this, othershape, this.velocityY, this.velocityX).collideTop == true || this.collision.isCollidingWith(this, othershape, this.velocityY, this.velocityX).collideTop == true)) {
         if (othershape.dynamic) {
-          this.physics.applyElasticity(this);
+          console.log("Top collided")
+          this.physics.applyVerticalElasticity(this);
           othershape.physics.applyMomentum(othershape, this);
-    //    shape.updatePosition(); 
+    //    shape.updatePosition();
           return;
         } else {
-          this.physics.applyElasticity(this);
-  //      this.updatePosition();
-          return; 
+          this.physics.applyVerticalElasticity(this);
+    //    this.updatePosition();
+          return;
+        }
+      }
+      if (othershape !== this && (this.collision.isCollidingWith(this, othershape, this.velocityY, this.velocityX).collideLeft == true || this.collision.isCollidingWith(this, othershape, this.velocityY, this.velocityX).collideRight == true)) {
+        if (othershape.dynamic) {
+          console.log("Top collided")
+          this.physics.applyHorizontalElasticity(this);
+          othershape.physics.applyMomentum(othershape, this);
+    //    shape.updatePosition();
+          return;
+        } else {
+          this.physics.applyHorizontalElasticity(this);
+    //    this.updatePosition();
+          return;
         }
       }
     }
-    if (this.x < 0 || this.x + this.width > canvasCreator.canvas.width) {
-      this.velocityX *= -this.elasticity; 
+    if (this.x + this.width > canvasCreator.canvas.width - this.velocityX) {
+      this.x += this.velocityX/2;
+      this.physics.applyHorizontalElasticity(this);
     }
-    if (this.y < 0 || this.y + this.height > canvasCreator.canvas.height) {
-      this.physics.applyElasticity(this); 
+    if (this.x <= 0) {
+      this.x -= this.velocityX/2;
+      this.physics.applyHorizontalElasticity(this);
     }
+    if (this.y + this.height > canvasCreator.canvas.height - this.velocityY) {
+      this.y += this.velocityY/2;
+      this.physics.applyVerticalElasticity(this);
+    }
+    // Update position and apply gravity
+
   }
-/*
+  /*
   move(deltaX, deltaY, canvasCreator) {
     // Store current position for potential rollback
     const originalX = this.x;
@@ -79,28 +101,7 @@ export class PhysicsShape {
     }
   }
   */
-
-  isCollidingWith(otherShape) {
-    const deltaX = (otherShape.x + otherShape.width / 2) - (this.x + this.width / 2);
-    const deltaY = (otherShape.y + otherShape.height / 2) - (this.y + this.height / 2);
-  
-    const combinedHalfWidths = this.width / 2 + otherShape.width / 2;
-    const combinedHalfHeights = this.height / 2 + otherShape.height / 2;
-  
-    const overlapX = combinedHalfWidths - Math.abs(deltaX);
-    const overlapY = combinedHalfHeights - Math.abs(deltaY);
-  
-    if (overlapX > 0 && overlapY > 0) {
-      // Colliding
-      return true;
-    } else {
-      // Not colliding
-      return false;
-    }
-  }
-  
 }
-
 
 /*
 DELETED FUNCTION
