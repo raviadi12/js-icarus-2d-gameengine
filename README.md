@@ -45,7 +45,7 @@ Make sure you have Node.js and npm installed on your machine.
 
    This will launch the development server with hot module replacement (HMR).
 
-2. Open your browser and go to `http://localhost:3000` to see the rendering engine in action.
+2. Open your browser and go to `http://localhost:5173` to see the rendering engine in action.
 
 
 ## Contributing
