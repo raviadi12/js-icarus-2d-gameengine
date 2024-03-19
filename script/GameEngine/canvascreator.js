@@ -63,13 +63,13 @@ export class CanvasCreator {
       const transformedY = (text.y - this.camera.y) * this.camera.scale;
 
       this.context.fillStyle = text.color || "black";
-      this.context.font = text.font || "12px Arial";
+      this.context.font = text.font || "12px Monospace";
       this.context.fillText(text.content, transformedX, transformedY);
     });
     this.GUIText.forEach((text) => {
 
       this.context.fillStyle = text.color || "black";
-      this.context.font = text.font || "12px Arial";
+      this.context.font = text.font || "12px Monospace";
       this.context.fillText(text.content, text.x, text.y);
     });
   }

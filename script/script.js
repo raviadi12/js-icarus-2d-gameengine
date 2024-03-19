@@ -18,11 +18,11 @@ const wall1 = new StaticShape(100, 300, 30, 100, "white");
 const wall2 = new StaticShape(120, 300, 400, 30, "white");
 const wall3 = new StaticShape(490, 250, 30, 50, "white");
 const wall4 = new StaticShape(600, 800, 30, 100, "white");
-const text = new Text("AADADADA!", 50, 50, "white", "20px Arial");
-const text2 = new Text("Unik wkwkwk", 50, 100, "white", "20px Arial");
-const y_pos = new Text("Unik wkwkwk", 500, 100, "white", "20px Arial");
-const x_pos = new Text("Unik wkwkwk", 500, 50, "white", "20px Arial");
-const x_vel = new Text("Unik wkwkwk", 50, 150, "white", "20px Arial");
+const text = new Text("AADADADA!", 50, 50, "white", "20px Monospace");
+const text2 = new Text("Unik wkwkwk", 50, 100, "white", "20px Monospace");
+const y_pos = new Text("Unik wkwkwk", 500, 100, "white", "20px Monospace");
+const x_pos = new Text("Unik wkwkwk", 500, 50, "white", "20px Monospace");
+const x_vel = new Text("Unik wkwkwk", 50, 150, "white", "20px Monospace");
 
 shape1.name = "shape1"; 
 shape2.name = "shape2";
@@ -71,7 +71,7 @@ document.addEventListener("keydown", (event) => {
         selectedShape.physics.accelerate(selectedShape, 5, 0);
         break;
       case " ":
-        console.log("Space pressed");
+        //console.log("Space pressed");
         placeBlocks(selectedShape.x + selectedShape.width + 5, selectedShape.y)
         break;
       case "G":

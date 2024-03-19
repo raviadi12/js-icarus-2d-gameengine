@@ -10,6 +10,6 @@ export class StaticShape {
       this.color = color;
       this.width = width;
       this.height = height;
-      console.log("Created Static Shape with ID " + this.id)
+      //console.log("Created Static Shape with ID " + this.id)
     }
 }

@@ -30,7 +30,7 @@ export class PhysicsShape {
     for (const othershape of canvasCreator.shapes) {
       if (othershape !== this && (this.collision.isCollidingWith(this, othershape, this.velocityY, this.velocityX).collideTop == true || this.collision.isCollidingWith(this, othershape, this.velocityY, this.velocityX).collideTop == true)) {
         if (othershape.dynamic) {
-          console.log("Top collided")
+          //console.log("Top collided")
           this.physics.applyVerticalElasticity(this);
           othershape.physics.applyMomentum(othershape, this);
     //    shape.updatePosition();
@@ -43,7 +43,7 @@ export class PhysicsShape {
       }
       if (othershape !== this && (this.collision.isCollidingWith(this, othershape, this.velocityY, this.velocityX).collideLeft == true || this.collision.isCollidingWith(this, othershape, this.velocityY, this.velocityX).collideRight == true)) {
         if (othershape.dynamic) {
-          console.log("Top collided")
+          //console.log("Top collided")
           this.physics.applyHorizontalElasticity(this);
           othershape.physics.applyMomentum(othershape, this);
     //    shape.updatePosition();

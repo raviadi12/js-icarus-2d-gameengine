@@ -24,7 +24,7 @@ export class CollisionDetectionMechanics {
           if (overlapX >= overlapY) {
             // Colliding vertically
             if (deltaY >= 0 - Math.abs(velocityY)) {
-              console.log("Hitted Top Velocity " + velocityY)
+              //console.log("Hitted Top Velocity " + velocityY)
               collideTop = true;
             } else {
               collideBottom = true;

@@ -4,6 +4,6 @@ export class Text {
       this.x = x;
       this.y = y;
       this.color = color || "black";
-      this.font = font || "12px Arial";
+      this.font = font || "12px Monospace";
     }
   }
